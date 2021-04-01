@@ -89,9 +89,21 @@ public class ContainerPanelFactoryProvider implements PanelFactory {
             SourceSaver saver = api.getSourceSaver(entry);
 
             if (saver != null) {
-                String path = saver.getSourcePath(entry);
+                String path = saver.getSourcePath(entry); // original path
                 int index = path.lastIndexOf('/');
                 return path.substring(index+1);
+            } else {
+                return null;
+            }
+        }
+
+        public String getSourceFileDirectory() {
+            SourceSaver saver = api.getSourceSaver(entry);
+
+            if (saver != null) {
+                String path = saver.getSourcePath(entry); // original path
+                int index = path.lastIndexOf('/');
+                return path.substring(0, index);
             } else {
                 return null;
             }

@@ -14,6 +14,8 @@ import java.nio.file.Path;
 public interface SourcesSavable {
     String getSourceFileName();
 
+    String getSourceFileDirectory();
+
     int getFileCount();
 
     void save(API api, Controller controller, Listener listener, Path path);

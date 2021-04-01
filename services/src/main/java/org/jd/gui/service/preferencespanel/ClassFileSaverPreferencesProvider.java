@@ -41,7 +41,7 @@ public class ClassFileSaverPreferencesProvider extends JPanel implements Prefere
 
     @Override
     public void loadPreferences(Map<String, String> preferences) {
-        writeLineNumbersCheckBox.setSelected(!"false".equals(preferences.get(WRITE_LINE_NUMBERS)));
+        writeLineNumbersCheckBox.setSelected("true".equals(preferences.get(WRITE_LINE_NUMBERS))); // default false
         writeMetadataCheckBox.setSelected(!"false".equals(preferences.get(WRITE_METADATA)));
     }
 

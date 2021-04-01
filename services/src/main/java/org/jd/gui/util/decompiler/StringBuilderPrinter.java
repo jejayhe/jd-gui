@@ -10,7 +10,7 @@ package org.jd.gui.util.decompiler;
 import org.jd.core.v1.api.printer.Printer;
 
 public class StringBuilderPrinter implements Printer {
-    protected static final String TAB = "  ";
+    protected static final String TAB = "    ";
     protected static final String NEWLINE = "\n";
 
     protected StringBuilder stringBuffer = new StringBuilder(10*1024);

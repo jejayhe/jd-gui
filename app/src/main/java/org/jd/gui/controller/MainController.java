@@ -248,7 +248,7 @@ public class MainController implements API {
                 JFileChooser chooser = new JFileChooser();
                 JFrame mainFrame = mainView.getMainFrame();
 
-                chooser.setSelectedFile(new File(configuration.getRecentSaveDirectory(), sourcesSavable.getSourceFileName()));
+                chooser.setSelectedFile(new File(sourcesSavable.getSourceFileDirectory(), sourcesSavable.getSourceFileName()));
 
                 if (chooser.showSaveDialog(mainFrame) == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = chooser.getSelectedFile();

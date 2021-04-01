@@ -70,9 +70,9 @@ public class ClassFileSourceSaverProvider extends AbstractSourceSaverProvider {
             }
             // Init preferences
             Map<String, String> preferences = api.getPreferences();
-            boolean realignmentLineNumbers = getPreferenceValue(preferences, REALIGN_LINE_NUMBERS, true);
+            boolean realignmentLineNumbers = getPreferenceValue(preferences, REALIGN_LINE_NUMBERS, false);
             boolean unicodeEscape = getPreferenceValue(preferences, ESCAPE_UNICODE_CHARACTERS, false);
-            boolean showLineNumbers = getPreferenceValue(preferences, WRITE_LINE_NUMBERS, true);
+            boolean showLineNumbers = getPreferenceValue(preferences, WRITE_LINE_NUMBERS, false);
 
             Map<String, Object> configuration = new HashMap<>();
             configuration.put("realignLineNumbers", realignmentLineNumbers);
@@ -97,35 +97,39 @@ public class ClassFileSourceSaverProvider extends AbstractSourceSaverProvider {
 
             // Metadata
             if (getPreferenceValue(preferences, WRITE_METADATA, true)) {
-                // Add location
-                String location =
-                    new File(entry.getUri()).getPath()
-                    // Escape "\ u" sequence to prevent "Invalid unicode" errors
-                    .replaceAll("(^|[^\\\\])\\\\u", "\\\\\\\\u");
-                stringBuffer.append("\n\n/* Location:              ");
-                stringBuffer.append(location);
-                // Add Java compiler version
-                int majorVersion = printer.getMajorVersion();
-
-                if (majorVersion >= 45) {
-                    stringBuffer.append("\n * Java compiler version: ");
-
-                    if (majorVersion >= 49) {
-                        stringBuffer.append(majorVersion - (49 - 5));
-                    } else {
-                        stringBuffer.append(majorVersion - (45 - 1));
-                    }
-
-                    stringBuffer.append(" (");
-                    stringBuffer.append(majorVersion);
-                    stringBuffer.append('.');
-                    stringBuffer.append(printer.getMinorVersion());
-                    stringBuffer.append(')');
-                }
-                // Add JD-Core version
-                stringBuffer.append("\n * JD-Core Version:       ");
-                stringBuffer.append(preferences.get(JD_CORE_VERSION));
-                stringBuffer.append("\n */");
+//                // Add location
+//                String location =
+//                    new File(entry.getUri()).getPath()
+//                    // Escape "\ u" sequence to prevent "Invalid unicode" errors
+//                    .replaceAll("(^|[^\\\\])\\\\u", "\\\\\\\\u");
+//                stringBuffer.append("\n\n/* Location:              ");
+//                stringBuffer.append(location);
+//                // Add Java compiler version
+//                int majorVersion = printer.getMajorVersion();
+//
+//                if (majorVersion >= 45) {
+//                    stringBuffer.append("\n * Java compiler version: ");
+//
+//                    if (majorVersion >= 49) {
+//                        stringBuffer.append(majorVersion - (49 - 5));
+//                    } else {
+//                        stringBuffer.append(majorVersion - (45 - 1));
+//                    }
+//
+//                    stringBuffer.append(" (");
+//                    stringBuffer.append(majorVersion);
+//                    stringBuffer.append('.');
+//                    stringBuffer.append(printer.getMinorVersion());
+//                    stringBuffer.append(')');
+//                }
+//                // Add JD-Core version
+//                stringBuffer.append("\n * JD-Core Version:       ");
+//                stringBuffer.append(preferences.get(JD_CORE_VERSION));
+//                stringBuffer.append("\n */");
+                stringBuffer.insert(0, "//\n" +
+                        "// Source code recreated from a .class file by jd-gui\n" +
+                        "// (powered by jd decompiler)\n" +
+                        "//\n\n");
             }
 
             try (PrintStream ps = new PrintStream(new NewlineOutputStream(Files.newOutputStream(path)), true, "UTF-8")) {
