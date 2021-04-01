@@ -1,6 +1,9 @@
-# JD-GUI
+# JD-GUI Improved
+
+tab改成4个空格。保存到jar目录。
 
 JD-GUI, a standalone graphical utility that displays Java sources from CLASS files.
+
 
 ![](https://raw.githubusercontent.com/java-decompiler/jd-gui/master/src/website/img/jd-gui.png)
 
